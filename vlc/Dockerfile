@@ -1,4 +1,4 @@
-ARG BUILD_FROM
+ARG BUILD_FROM=ghcr.io/home-assistant/base:3.24
 FROM ${BUILD_FROM}
 
 # Install VLC
@@ -18,3 +18,9 @@ RUN \
         
 WORKDIR /
 COPY rootfs /
+
+LABEL \
+    org.opencontainers.image.title="Home Assistant App: VLC" \
+    org.opencontainers.image.description="Turn your device into a Media Player with VLC" \
+    org.opencontainers.image.source="https://github.com/home-assistant/app-vlc" \
+    org.opencontainers.image.licenses="Apache License 2.0"
