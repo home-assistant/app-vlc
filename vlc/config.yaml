@@ -18,5 +18,4 @@ map:
   - share:ro
   - media:ro
 panel_icon: mdi:vlc
-schema: false
 startup: services
