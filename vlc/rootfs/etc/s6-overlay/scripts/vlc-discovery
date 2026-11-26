@@ -15,6 +15,7 @@ ha_config=$(\
 )
 
 if bashio::discovery "vlc_telnet" "${ha_config}" > /dev/null; then
+    touch /run/vlc-discovery-sent
     bashio::log.info "Successfully send discovery information to Home Assistant."
 else
     bashio::log.error "Discovery message to Home Assistant failed!"
