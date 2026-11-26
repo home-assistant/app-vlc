@@ -6,6 +6,14 @@
 # ==============================================================================
 declare ha_config
 
+# Give VLC a moment to listen. It only starts once the PulseAudio socket is
+# available, so do not wait for long: this blocks the s6-rc startup, and with
+# it a container stop.
+bashio::net.wait_for 4212 localhost 5
+if ! (echo > /dev/tcp/localhost/4212) > /dev/null 2>&1; then
+    bashio::log.warning "VLC is not listening yet, sending discovery anyway."
+fi
+
 # Prepare discovery payload
 ha_config=$(\
     bashio::var.json \
@@ -15,7 +23,6 @@ ha_config=$(\
 )
 
 if bashio::discovery "vlc_telnet" "${ha_config}" > /dev/null; then
-    touch /run/vlc-discovery-sent
     bashio::log.info "Successfully send discovery information to Home Assistant."
 else
     bashio::log.error "Discovery message to Home Assistant failed!"
