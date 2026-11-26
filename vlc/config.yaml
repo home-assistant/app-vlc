@@ -19,3 +19,4 @@ map:
   - media:ro
 panel_icon: mdi:vlc
 startup: services
+supervisor_api_tcp: false
