@@ -16,9 +16,6 @@ done
 
 bashio::log.info "PulseAudio socket available, starting VLC"
 
-# Send out discovery information to Home Assistant
-/etc/s6-overlay/scripts/vlc-discovery &
-
 # set the home directory environment variable, if not set, s6-setuidgid will try to use the root home
 export HOME=/home/vlc
 
